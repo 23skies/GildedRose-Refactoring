@@ -62,7 +62,7 @@ internal class GildedRoseTest {
     }
 
     @Test
-    fun `incremental item increases in quality`() {
+    fun `aging item increases in quality`() {
         // Given
         val items = arrayOf(Item("Aged Brie", 3, 30))
         val app = GildedRose(items)
