@@ -1,5 +1,7 @@
-package com.gildedrose
+package com.gildedrose.factory
 
+import com.gildedrose.item.Item
+import com.gildedrose.item.ItemWrapper
 import com.gildedrose.strategy.*
 
 object ItemWrapperFactory {
