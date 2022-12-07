@@ -12,3 +12,5 @@ class GildedRose(var items: Array<Item>) {
     }
 
 }
+
+// TODO Make strategies more generic, less hardcoded values.

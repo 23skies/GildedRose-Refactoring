@@ -4,6 +4,11 @@ import com.gildedrose.item.Item
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
+/* NOTE I know this test class contains some
+ * duplication, and could be refactored further
+ * However, the current author has some
+ * production issues to attend.
+ */
 internal class GildedRoseTest {
 
     @Test
