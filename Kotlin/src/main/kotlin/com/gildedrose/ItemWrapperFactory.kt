@@ -1,5 +1,7 @@
 package com.gildedrose
 
+import com.gildedrose.strategy.*
+
 object ItemWrapperFactory {
 
     private val legendaryItems = listOf("Sulfuras, Hand of Ragnaros")
@@ -8,20 +10,21 @@ object ItemWrapperFactory {
 
     fun getItemWrapper(item: Item) = when (item.name) {
         in agingItems -> ItemWrapper(item,
-            UpdateStrategy(AgingQualityUpdateStrategy, AgingSellInUpdateStrategy)
+            UpdateStrategy(AgingQualityUpdateStrategy, DefaultSellInUpdateStrategy)
         )
 
         in incrementallyAgingItems -> ItemWrapper(
             item,
-            UpdateStrategy(IncrementallyAgingQualityUpdateStrategy, IncrementallyAgingSellInUpdateStrategy)
+            UpdateStrategy(IncrementallyAgingQualityUpdateStrategy, DefaultSellInUpdateStrategy)
         )
 
         in legendaryItems -> ItemWrapper(
             item,
-            UpdateStrategy(LegendaryQualityUpdateStrategy, LegendarySellInUpdateStrategy)
+            UpdateStrategy(LegendaryQualityUpdateStrategy, NeverExpireSellInUpdateStrategy)
         )
 
-        else -> ItemWrapper(item,
+        else -> ItemWrapper(
+            item,
             UpdateStrategy(DefaultQualityUpdateStrategy, DefaultSellInUpdateStrategy)
         )
     }

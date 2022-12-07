@@ -1,5 +1,7 @@
 package com.gildedrose
 
+import com.gildedrose.strategy.UpdateStrategy
+
 class ItemWrapper(
     private val item: Item,
     private val strategy: UpdateStrategy,
