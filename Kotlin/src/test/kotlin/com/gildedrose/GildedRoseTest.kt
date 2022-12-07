@@ -16,7 +16,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("item1", app.items[0].name)
         assertEquals(10, app.items[0].sellIn)
     }
 
@@ -30,7 +29,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("item1", app.items[0].name)
         assertEquals(19, app.items[0].quality)
     }
 
@@ -44,7 +42,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("item1", app.items[0].name)
         assertEquals(18, app.items[0].quality)
     }
 
@@ -58,7 +55,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("item1", app.items[0].name)
         assertEquals(0, app.items[0].quality)
     }
 
@@ -72,7 +68,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("Aged Brie", app.items[0].name)
         assertEquals(31, app.items[0].quality)
     }
 
@@ -86,7 +81,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("Aged Brie", app.items[0].name)
         assertEquals(50, app.items[0].quality)
     }
 
@@ -100,7 +94,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("Sulfuras, Hand of Ragnaros", app.items[0].name)
         assertEquals(1, app.items[0].sellIn)
     }
 
@@ -114,7 +107,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("Sulfuras, Hand of Ragnaros", app.items[0].name)
         assertEquals(20, app.items[0].quality)
     }
 
@@ -128,7 +120,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("Sulfuras, Hand of Ragnaros", app.items[0].name)
         assertEquals(80, app.items[0].quality)
     }
 
@@ -142,7 +133,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", app.items[0].name)
         assertEquals(31, app.items[0].quality)
     }
 
@@ -156,7 +146,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", app.items[0].name)
         assertEquals(32, app.items[0].quality)
     }
 
@@ -170,7 +159,6 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", app.items[0].name)
         assertEquals(33, app.items[0].quality)
     }
 
@@ -184,8 +172,52 @@ internal class GildedRoseTest {
         app.updateQuality()
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", app.items[0].name)
         assertEquals(0, app.items[0].quality)
+    }
+
+    @Test
+    fun `conjured item decreases in quality twice as fast before expiry date`() {
+        // Given
+        val items = arrayOf(Item("Some conjured item", 10, 4))
+        val app = GildedRose(items)
+
+        // When
+        app.updateQuality()
+
+        // Then
+        assertEquals(2, app.items[0].quality)
+    }
+
+    @Test
+    fun `conjured item decreases in quality twice as fast after expiry date`() {
+        // Given
+        val items = arrayOf(Item("Some conjured item", 0, 4))
+        val app = GildedRose(items)
+
+        // When
+        app.updateQuality()
+
+        // Then
+        assertEquals(0, app.items[0].quality)
+    }
+
+    @Test
+    fun `items processed in correct order`() {
+        // Given
+        val items = arrayOf(
+            Item("item1", 10, 10),
+            Item("Aged Brie", 1, 3),
+            Item("Some conjured item", 10, 1),
+        )
+        val app = GildedRose(items)
+
+        // When
+        app.updateQuality()
+
+        // Then
+        assertEquals("item1", app.items[0].name)
+        assertEquals("Aged Brie", app.items[1].name)
+        assertEquals("Some conjured item", app.items[2].name)
     }
 
 }

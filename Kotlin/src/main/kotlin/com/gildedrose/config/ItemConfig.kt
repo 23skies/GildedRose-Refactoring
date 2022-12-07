@@ -17,6 +17,10 @@ class ItemConfig {
             IncrementallyAgingQualityUpdateStrategy,
             DefaultSellInUpdateStrategy
         ),
+        "Some conjured item" to UpdateStrategy(
+            ConjuredQualityUpdateStrategy,
+            DefaultSellInUpdateStrategy
+        )
     )
 
 }
