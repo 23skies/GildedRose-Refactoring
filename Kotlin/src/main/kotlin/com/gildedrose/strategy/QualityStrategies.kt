@@ -12,7 +12,7 @@ object DefaultQualityUpdateStrategy: QualityUpdateStrategy {
 
 
 
-object LegendaryQualityUpdateStrategy: QualityUpdateStrategy {
+object NeverDecreaseQualityUpdateStrategy: QualityUpdateStrategy {
 
     override fun updatedQuality(currentQuality: Int, sellInDays: Int) = currentQuality
 
